@@ -28,6 +28,7 @@ jobs:
     name: 编译固件 - ${{ matrix.device }} - ${{ matrix.source }}
     runs-on: ubuntu-22.04
     strategy:
+      fail-fast: false  # <--- 就是加这一行
       matrix:
         device: ["rax3000m", "rax3000me", "rax3000m-emmc", "rax3000m-nand", "rax3000m-256m-nand", "xr30-emmc", "xr30-nand"]
         source: ["openwrt"]
@@ -132,6 +133,7 @@ jobs:
         cd .. 
         [ -e patch ] && cp -rf patch/diy/*.patch $SOURCE_NAME
         [ -e patch ] && cp -rf patch/luci/*.patch $SOURCE_NAME/feeds/luci
+        
         
     - name: 加载自定义脚本
       run: |
